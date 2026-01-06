@@ -1,6 +1,6 @@
 -- =========================================================
 -- Leader
--- =========================================================
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -118,5 +118,47 @@ require("lazy").setup({
       require("onedark").load()
     end,
   },
+
 })
+
+-- =========================================================
+-- Diagnostics display (Neovim 0.11)
+-- =========================================================
+vim.diagnostic.config({
+  virtual_text = {
+    spacing = 2,
+    prefix = "●",   -- 你也可以用 "▎" / "■"
+  },
+  signs = true,     -- 左侧 E/W
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+  float = {
+    border = "rounded",
+    source = "always",
+  },
+})
+
+-- 光标停留时自动显示错误（很爽）
+vim.api.nvim_create_autocmd("CursorHold", {
+  callback = function()
+    vim.diagnostic.open_float(nil, { focus = false })
+  end,
+})
+
+
+if vim.fn.has("wsl") == 1 then
+  vim.g.clipboard = {
+    name = "win32yank-wsl",
+    copy = {
+      ["+"] = "/mnt/d/StaticTools/win32yank/win32yank.exe -i --crlf",
+      ["*"] = "/mnt/d/StaticTools/win32yank/win32yank.exe -i --crlf",
+    },
+    paste = {
+      ["+"] = "/mnt/d/StaticTools/win32yank/win32yank.exe -o --lf",
+      ["*"] = "/mnt/d/StaticTools/win32yank/win32yank.exe -o --lf",
+    },
+    cache_enabled = 0,
+  }
+end
 
