@@ -33,10 +33,11 @@ vim.opt.smartindent = true
 -- =========================================================
 -- Keymaps
 -- =========================================================
-vim.keymap.set("i", "jj", "<Esc>")
+vim.keymap.set("i", "jk", "<Esc>")
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+--vim.keymap.set("n", "<leader>nh", ":nohl<CR>")
 
 -- =========================================================
 -- Plugins
@@ -61,7 +62,7 @@ require("lazy").setup({
     vim.lsp.config("clangd", {
       on_attach = on_attach,
     })
-
+    vim.lsp.enable("clangd")
     end,
   },
 
