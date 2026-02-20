@@ -37,7 +37,8 @@ vim.keymap.set("i", "jk", "<Esc>")
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
---vim.keymap.set("n", "<leader>nh", ":nohl<CR>")
+vim.keymap.set("n", "<leader>nh", ":nohl<CR>")
+vim.keymap.set('n', '<leader>i', ':keepjumps normal! gg=G<CR>', { noremap = true, silent = true })
 
 -- =========================================================
 -- Plugins
@@ -61,6 +62,10 @@ require("lazy").setup({
       end
     vim.lsp.config("clangd", {
       on_attach = on_attach,
+      cmd = {
+          "clangd",
+          "--query-driver=/usr/bin/arm-none-eabi-gcc"
+      },
     })
     vim.lsp.enable("clangd")
     end,
